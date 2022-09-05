@@ -37,7 +37,7 @@ class AirHockeyHit(AirHockeySingle):
         super().__init__(gamma=gamma, horizon=horizon, timestep=timestep, n_intermediate_steps=n_intermediate_steps,
                          debug_gui=debug_gui, env_noise=env_noise, obs_noise=obs_noise, obs_delay=obs_delay,
                          torque_control=torque_control, step_action_function=step_action_function,
-                         table_boundary_terminate=table_boundary_terminate, number_flags=1)
+                         table_boundary_terminate=table_boundary_terminate, number_flags=0)
 
     def setup(self, state):
         # Initial position of the puck
@@ -157,9 +157,9 @@ class AirHockeyHit(AirHockeySingle):
             if collision_count > 0:
                 self.has_bounce = True
 
-    def _create_observation(self, state):
-        obs = super(AirHockeyHit, self)._create_observation(state)
-        return np.append(obs, [self.has_hit])
+    #def _create_observation(self, state):
+    #   obs = super(AirHockeyHit, self)._create_observation(state)
+    #    return np.append(obs, [self.has_hit])
 
 
 if __name__ == '__main__':

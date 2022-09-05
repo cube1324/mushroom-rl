@@ -12,7 +12,7 @@ class AirHockeyDefend(AirHockeySingle):
     """
     def __init__(self, gamma=0.99, horizon=500, env_noise=False, obs_noise=False, obs_delay=False, torque_control=True,
                  step_action_function=None, timestep=1 / 240., n_intermediate_steps=1, debug_gui=False,
-                 random_init=False, action_penalty=1e-3, table_boundary_terminate=False, init_velocity_range=(1, 2.2)):
+                 random_init=False, action_penalty=1e-3, table_boundary_terminate=False, init_velocity_range=(1.3, 1.9)):
         """
         Constructor
 
@@ -34,7 +34,7 @@ class AirHockeyDefend(AirHockeySingle):
         super().__init__(gamma=gamma, horizon=horizon, timestep=timestep, n_intermediate_steps=n_intermediate_steps,
                          debug_gui=debug_gui, env_noise=env_noise, obs_noise=obs_noise, obs_delay=obs_delay,
                          torque_control=torque_control, step_action_function=step_action_function,
-                         table_boundary_terminate=table_boundary_terminate, number_flags=2)
+                         table_boundary_terminate=table_boundary_terminate, number_flags=0)
 
     def setup(self, state=None):
         # Set initial puck parameters
@@ -155,9 +155,9 @@ class AirHockeyDefend(AirHockeySingle):
             if collision_count > 0:
                 self.has_bounce = True
 
-    def _create_observation(self, state):
-        obs = super(AirHockeyDefend, self)._create_observation(state)
-        return np.append(obs, [self.has_hit, self.has_bounce])
+    #def _create_observation(self, state):
+    #    obs = super(AirHockeyDefend, self)._create_observation(state)
+    #    return np.append(obs, [self.has_hit, self.has_bounce])
 
 
 if __name__ == '__main__':
