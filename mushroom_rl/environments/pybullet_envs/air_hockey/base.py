@@ -128,6 +128,13 @@ class AirHockeyBase(PyBullet):
         self.env_spec['mallet'] = {"radius": 0.05}
         self.env_spec['joint_vel_threshold'] = 0.1
 
+    def _custom_load_models(self):
+        box = self._client.createVisualShape(shapeType=pybullet.GEOM_BOX, specularColor=[0, 0, 0],
+                                             rgbaColor=[0.502, 0.502, 0.502, 1], halfExtents=[5, 3, 0.01])
+        self._client.createMultiBody(baseVisualShapeIndex=box, basePosition=[0, 0, -0.28], baseMass=0)
+
+        return {"base_plate": box}
+
     def _compute_action(self, state, action):
         if self.step_action_function is None:
             return action

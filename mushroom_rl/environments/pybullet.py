@@ -50,7 +50,7 @@ class PyBullet(Environment):
 
         # Create the simulation and viewer
         if debug_gui:
-            self._client = BulletClient(connection_mode=pybullet.GUI)
+            self._client = BulletClient(connection_mode=pybullet.GUI, options='--background_color_red=1.0 --background_color_green=1.0 --background_color_blue=1.0')
             self._client.configureDebugVisualizer(pybullet.COV_ENABLE_GUI, 0)
         else:
             self._client = BulletClient(connection_mode=pybullet.DIRECT)
