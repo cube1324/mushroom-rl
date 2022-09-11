@@ -130,7 +130,7 @@ class AirHockeyBase(PyBullet):
 
     def _custom_load_models(self):
         box = self._client.createVisualShape(shapeType=pybullet.GEOM_BOX, specularColor=[0, 0, 0],
-                                             rgbaColor=[0.502, 0.502, 0.502, 1], halfExtents=[5, 3, 0.01])
+                                             rgbaColor=[0.31, 0.31, 0.31, 1], halfExtents=[5, 3, 0.01])
         self._client.createMultiBody(baseVisualShapeIndex=box, basePosition=[0, 0, -0.28], baseMass=0)
 
         return {"base_plate": box}

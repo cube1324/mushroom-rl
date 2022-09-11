@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <robot name="planar_robot_1">
   <material name="red">
-    <color rgba="0.811 0.039 0.172 1"/>
+    <color rgba="0.58 0.03 0.25 1"/>
   </material>
 
   <material name="black">
-    <color rgba="0.137 0.145 0.152 1"/>
+    <color rgba="0.1 0.1 0.11 1"/>
   </material>
 
   <link name="world"/>
