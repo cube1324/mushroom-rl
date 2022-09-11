@@ -1,14 +1,22 @@
 <?xml version="1.0"?>
 <robot name="planar_robot_2">
+  <material name="red">
+    <color rgba="0.58 0.03 0.25 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0.1 0.1 0.11 1"/>
+  </material>
+
   <link name="world"/>
 
-  <joint name="planar_robot_2/base_joint" type="fixed">
+  <joint name="planar_robot_1/base_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
     <parent link="world"/>
-    <child link="planar_robot_2/base_link"/>
+    <child link="planar_robot_1/base_link"/>
   </joint>
 
-  <link name="planar_robot_2/base_link">
+  <link name="planar_robot_1/base_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
       <mass value="1"/>
@@ -18,9 +26,7 @@
       <geometry>
         <cylinder radius="0.075" length="0.4"/>
       </geometry>
-      <material name="black">
-        <color rgba="0 0 0 1"/>
-      </material>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
@@ -29,15 +35,15 @@
     </collision>
   </link>
 
-  <joint name="planar_robot_2/joint_1" type="revolute">
+  <joint name="planar_robot_1/joint_1" type="revolute">
     <axis xyz="0 0 1"/>
-    <parent link="planar_robot_2/base_link"/>
-    <child link="planar_robot_2/link_1"/>
+    <parent link="planar_robot_1/base_link"/>
+    <child link="planar_robot_1/link_1"/>
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
     <limit effort="40.0" lower="-2.9670597283903604" upper="2.9670597283903604" velocity="2.35619449019"/>
   </joint>
 
-  <link name="planar_robot_2/link_1">
+  <link name="planar_robot_1/link_1">
     <inertial>
       <origin rpy="0 0 0" xyz="0.25 0.0 0.0"/>
       <mass value="3"/>
@@ -48,10 +54,17 @@
       <geometry>
         <cylinder radius="0.04" length="0.5"/>
       </geometry>
-      <material name="red">
-        <color rgba="0.8 0 0 1"/>
-      </material>
+      <material name="red"/>
     </visual>
+
+    <visual>
+      <origin rpy="0 1.57079632679 0" xyz="0.5 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
     <collision>
       <origin rpy="0 1.57079632679 0" xyz="0.25 0.0 0.0"/>
       <geometry>
@@ -60,15 +73,15 @@
     </collision>
   </link>
 
-  <joint name="planar_robot_2/joint_2" type="revolute">
+  <joint name="planar_robot_1/joint_2" type="revolute">
     <axis xyz="0 0 1"/>
-    <parent link="planar_robot_2/link_1"/>
-    <child link="planar_robot_2/link_2"/>
+    <parent link="planar_robot_1/link_1"/>
+    <child link="planar_robot_1/link_2"/>
     <origin xyz="0.5 0 0"/>
     <limit effort="15.0" lower="-2.0943951023931953" upper="2.0943951023931953" velocity="2.35619449019"/>
   </joint>
 
-  <link name="planar_robot_2/link_2">
+  <link name="planar_robot_1/link_2">
     <inertial>
       <origin rpy="0 0 0" xyz="0.2 0.0 0.0"/>
       <mass value="2.4"/>
@@ -79,10 +92,17 @@
         <cylinder radius="0.04" length="0.4"/>
       </geometry>
       <origin rpy="0.0 1.57079632679 0" xyz="0.2 0.0 0.0"/>
-      <material name="green">
-        <color rgba="0 0.8 0.0 1"/>
-      </material>
+      <material name="red"/>
     </visual>
+
+    <visual>
+      <origin rpy="0 1.57079632679 0" xyz="0.4 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
     <collision>
       <geometry>
         <cylinder radius="0.04" length="0.4"/>
@@ -91,15 +111,15 @@
     </collision>
   </link>
 
-  <joint name="planar_robot_2/joint_3" type="revolute">
+  <joint name="planar_robot_1/joint_3" type="revolute">
     <axis xyz="0 0 1"/>
-    <parent link="planar_robot_2/link_2"/>
-    <child link="planar_robot_2/link_3"/>
+    <parent link="planar_robot_1/link_2"/>
+    <child link="planar_robot_1/link_3"/>
     <origin xyz="0.4 0 0"/>
     <limit effort="2.0" lower="-2.0943951023931953" upper="2.0943951023931953" velocity="2.35619449019"/>
   </joint>
 
-  <link name="planar_robot_2/link_3">
+  <link name="planar_robot_1/link_3">
     <inertial>
       <origin rpy="0 0 0" xyz="0.2 0.0 0.0"/>
       <mass value="2.4"/>
@@ -110,10 +130,17 @@
         <cylinder radius="0.04" length="0.4"/>
       </geometry>
       <origin rpy="0 1.57079632679 0" xyz="0.2 0 0"/>
-      <material name="blue">
-        <color rgba="0 0 .8 1"/>
-      </material>
+      <material name="red"/>
     </visual>
+
+    <visual>
+      <origin rpy="0 1.57079632679 0" xyz="0.4 0.0 0.0"/>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
     <collision>
       <geometry>
         <cylinder radius="0.04" length="0.4"/>
@@ -122,14 +149,14 @@
     </collision>
   </link>
 
-  <joint name="planar_robot_2/joint_striker" type="fixed">
+  <joint name="planar_robot_1/joint_striker" type="fixed">
       <axis xyz="1 0 0"/>
-      <parent link="planar_robot_2/link_3"/>
-      <child link="planar_robot_2/link_striker_hand"/>
+      <parent link="planar_robot_1/link_3"/>
+      <child link="planar_robot_1/link_striker_hand"/>
       <origin xyz="0.4 0 0.0"/>
   </joint>
 
-  <link name="planar_robot_2/link_striker_hand">
+  <link name="planar_robot_1/link_striker_hand">
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
       <mass value="0.1"/>
@@ -170,14 +197,14 @@
     </contact>
   </link>
 
-  <joint name="planar_robot_2/joint_striker_ee" type="fixed">
+  <joint name="planar_robot_1/joint_striker_ee" type="fixed">
       <axis xyz="1 0 0"/>
-      <parent link="planar_robot_2/link_striker_hand"/>
-      <child link="planar_robot_2/link_striker_ee"/>
+      <parent link="planar_robot_1/link_striker_hand"/>
+      <child link="planar_robot_1/link_striker_ee"/>
       <origin xyz="0.0 0 -0.189"/>
   </joint>
 
-  <link name="planar_robot_2/link_striker_ee">
+  <link name="planar_robot_1/link_striker_ee">
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.01"/>
       <mass value="0.1"/>
