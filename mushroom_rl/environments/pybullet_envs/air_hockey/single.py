@@ -27,8 +27,8 @@ class AirHockeySingle(AirHockeyBase):
                          timestep=timestep, n_intermediate_steps=n_intermediate_steps, debug_gui=debug_gui,
                          table_boundary_terminate=table_boundary_terminate)
 
-        self._client.resetDebugVisualizerCamera(cameraDistance=1.5, cameraYaw=-90.0, cameraPitch=-45.0,
-                                                cameraTargetPosition=[-0.5, 0., 0.])
+        self._client.resetDebugVisualizerCamera(cameraDistance=1.8, cameraYaw=-142, cameraPitch=-45,
+                                                cameraTargetPosition=[-0.5, -0.28, -0.4])
         self._change_dynamics()
         self._disable_collision()
 
