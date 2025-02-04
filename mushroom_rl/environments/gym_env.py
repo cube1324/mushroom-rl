@@ -1,7 +1,9 @@
 import time
 
-import gym
-from gym import spaces as gym_spaces
+# import gym
+# from gym import spaces as gym_spaces
+import gymnasium as gym
+from gymnasium import spaces as gym_spaces
 
 import numpy as np
 
@@ -14,7 +16,7 @@ except ImportError:
 from mushroom_rl.core import Environment, MDPInfo
 from mushroom_rl.utils.spaces import *
 
-gym.logger.set_level(40)
+# gym.logger.set_level(40)
 
 
 class Gym(Environment):
@@ -83,7 +85,7 @@ class Gym(Environment):
 
     def reset(self, state=None):
         if state is None:
-            return np.atleast_1d(self.env.reset())
+            return np.atleast_1d(self.env.reset()[0])
         else:
             self.env.reset()
             self.env.state = state
@@ -92,7 +94,7 @@ class Gym(Environment):
 
     def step(self, action):
         action = self._convert_action(action)
-        obs, reward, absorbing, info = self.env.step(action)
+        obs, reward, absorbing, truncated, info = self.env.step(action)
 
         return np.atleast_1d(obs), reward, absorbing, info
 

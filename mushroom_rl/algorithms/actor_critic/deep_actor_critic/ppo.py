@@ -96,20 +96,27 @@ class PPO(Agent):
         self._iter += 1
 
     def _update_policy(self, obs, act, adv, old_log_p):
+        sum_log_std_grad = 0
         for epoch in range(self._n_epochs_policy()):
             for obs_i, act_i, adv_i, old_log_p_i in minibatch_generator(
                     self._batch_size(), obs, act, adv, old_log_p):
                 self._optimizer.zero_grad()
+                log_prob = self.policy.log_prob_t(obs_i, act_i)
+                log_prob.retain_grad()
                 prob_ratio = torch.exp(
-                    self.policy.log_prob_t(obs_i, act_i) - old_log_p_i
+                    log_prob - old_log_p_i
                 )
                 clipped_ratio = torch.clamp(prob_ratio, 1 - self._eps_ppo(),
                                             1 + self._eps_ppo.get_value())
                 loss = -torch.mean(torch.min(prob_ratio * adv_i,
                                              clipped_ratio * adv_i))
                 loss -= self._ent_coeff()*self.policy.entropy_t(obs_i)
+                prob_ratio.retain_grad()
                 loss.backward()
+                sum_log_std_grad += self.policy._log_sigma.grad.item()
                 self._optimizer.step()
+
+        print("Average log std grad: ", sum_log_std_grad)
 
     def _log_info(self, dataset, x, v_target, old_pol_dist):
         if self._logger:
